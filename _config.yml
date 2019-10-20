@@ -1,4 +1,4 @@
-title: Just make things
+title: Sébastien ALTOUNIAN
 author: Sébastien ALTOUNIAN
 # email: sebastien.altounian@gmail.com
 description: > # this means to ignore newlines until "show_excerpts:"
@@ -46,6 +46,19 @@ minima:
 # this and add the path to the pages in order as they should show up
 #header_pages:
 # - about.md
+
+# Site settings
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "" # the base hostname & protocol for your site
+
+twitter_username:
+github_username: deathura
+instagram_username: altouniansebastien
+linkedin_username: sébastien-altounian
+
+# Build settings
+markdown: kramdown
+
 
 # Build settings
 theme: minima
