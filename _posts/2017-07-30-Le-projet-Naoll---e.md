@@ -1,6 +1,5 @@
 ---
 layout: post
-permalink: /test/
 ---
 
 Petit projet d'un robot fait maison de A à Z ! 
