@@ -1,10 +1,1601 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Simple Static Website</title>
-  </head>
-  <body>
-    <h1>Welcome</h1>
-    <p>Hello world!</p>
-  </body>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Récital de DEM - Sébastien ALTOUNIAN</title>
+    <style>
+        :root {
+            --color-primary: #ffa500;    /* Orange vif - Modifiable facilement */
+            --color-secondary: #0088ff;  /* Bleu foncé - Modifiable facilement */
+            --color-accent: #00ff00;     /* Vert lime */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .geometric-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: #faf8f5;
+            overflow: hidden;
+        }
+
+        .triangle-svg {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.7;
+            animation: float-triangle 8s ease-in-out infinite;
+        }
+
+        .triangle-svg.small {
+            width: 25px;
+            height: 25px;
+        }
+
+        .triangle-svg.large {
+            width: 60px;
+            height: 60px;
+        }
+
+        @keyframes float-triangle {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, -5px) rotate(90deg); }
+            50% { transform: translate(-5px, 10px) rotate(180deg); }
+            75% { transform: translate(-10px, -10px) rotate(270deg); }
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(255,165,0,0.9), rgba(0,136,255,0.9));
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            padding: 2rem 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInDown 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        .date {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        nav {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 2px;
+        }
+
+        .parcours-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .parcours-text {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .parcours-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-container {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            padding: 5px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .identity-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .work-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .work-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+        }
+
+        .work-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .work-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-composer {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .work-theme {
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .work-description {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .click-hint {
+            background: var(--color-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .work-card:hover .click-hint {
+            background: var(--color-secondary);
+        }
+
+        /* Modal pour le contenu détaillé */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header .composer {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .work-details {
+            margin-bottom: 2rem;
+        }
+
+        .work-details h3 {
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .work-details p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .work-analysis {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .work-texts {
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .text-section {
+            padding: 1.5rem;
+        }
+
+        .text-section:not(:last-child) {
+            border-bottom: 1px solid #eee;
+        }
+
+        .text-section h4 {
+            color: var(--color-secondary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .text-content {
+            line-height: 1.8;
+            color: #333;
+            white-space: pre-line;
+            font-family: 'Georgia', serif;
+        }
+
+        .operap-section {
+            background: linear-gradient(135deg, rgba(255,165,0,0.1), rgba(0,136,255,0.1));
+            background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 10%, transparent), color-mix(in srgb, var(--color-secondary) 10%, transparent));
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .operap-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .operap-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .operap-description {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #333, #555);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .contact-card h3 {
+            margin-bottom: 1rem;
+            color: #4ecdc4;
+        }
+
+        .contact-card a {
+            color: white;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .contact-card a:hover {
+            color: #4ecdc4;
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .text-work {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .text-work::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #ffa500, #0088ff, #00ff00);
+        }
+
+        .text-work h3 {
+            color: #ffa500;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .text-work .composer {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .text-original, .text-translation {
+            margin-bottom: 1.5rem;
+        }
+
+        .text-original h4, .text-translation h4 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #0088ff;
+            padding-bottom: 0.5rem;
+        }
+
+        .text-content {
+            line-height: 1.8;
+            color: #555;
+            white-space: pre-line;
+        }
+
+        .text-content.french {
+            border-left: 4px solid #ffa500;
+            padding-left: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.4rem; }
+            .parcours-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .profile-container {
+                width: 250px;
+                height: 250px;
+            }
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .operap-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="geometric-bg">
+        <!-- Triangles en SVG - plus fiables et visibles -->
+        
+        <!-- Triangles orange vif -->
+        <svg class="triangle-svg" style="top: 5%; left: 10%;">
+            <polygon points="20,5 35,35 5,35" fill="#ffa500"/>
+        </svg>
+        <svg class="triangle-svg small" style="top: 45%; right: 20%;">
+            <polygon points="12,3 22,22 2,22" fill="#ffa500"/>
+        </svg>
+        
+        <!-- Triangles orange fluo -->
+        <svg class="triangle-svg" style="top: 15%; right: 15%;">
+            <polygon points="5,5 35,5 20,35" fill="#ff4500"/>
+        </svg>
+        <svg class="triangle-svg large" style="bottom: 20%; left: 8%;">
+            <polygon points="30,10 55,50 5,50" fill="#ff4500"/>
+        </svg>
+        
+        <!-- Triangles jaune électrique -->
+        <svg class="triangle-svg" style="top: 25%; left: 25%;">
+            <polygon points="35,20 5,35 35,35" fill="#ffff00"/>
+        </svg>
+        <svg class="triangle-svg small" style="bottom: 40%; right: 30%;">
+            <polygon points="22,12 2,22 22,22" fill="#ffff00"/>
+        </svg>
+        
+        <!-- Triangles vert lime -->
+        <svg class="triangle-svg large" style="top: 8%; left: 35%;">
+            <polygon points="30,10 55,50 5,50" fill="#00ff00"/>
+        </svg>
+        <svg class="triangle-svg" style="top: 60%; left: 15%;">
+            <polygon points="20,5 35,35 5,35" fill="#00ff00"/>
+        </svg>
+        
+        <!-- Triangles bleu foncé -->
+        <svg class="triangle-svg" style="top: 35%; right: 25%;">
+            <polygon points="5,20 35,5 35,35" fill="#0088ff"/>
+        </svg>
+        <svg class="triangle-svg small" style="bottom: 15%; left: 30%;">
+            <polygon points="2,12 22,2 22,22" fill="#0088ff"/>
+        </svg>
+        
+        <!-- Triangles bleu électrique -->
+        <svg class="triangle-svg" style="top: 50%; left: 40%;">
+            <polygon points="20,35 5,5 35,5" fill="#0080ff"/>
+        </svg>
+        <svg class="triangle-svg large" style="bottom: 30%; right: 10%;">
+            <polygon points="30,50 5,10 55,10" fill="#0088ff"/>
+        </svg>
+        
+        <!-- Triangles violet électrique -->
+        <svg class="triangle-svg small" style="top: 20%; left: 50%;">
+            <polygon points="12,22 2,2 22,2" fill="#8000ff"/>
+        </svg>
+        <svg class="triangle-svg" style="bottom: 50%; right: 15%;">
+            <polygon points="35,20 5,5 5,35" fill="#8000ff"/>
+        </svg>
+        
+        <!-- Triangles rouge vif -->
+        <svg class="triangle-svg" style="top: 70%; left: 20%;">
+            <polygon points="20,5 35,35 5,35" fill="#ff0040"/>
+        </svg>
+        <svg class="triangle-svg small" style="top: 12%; right: 35%;">
+            <polygon points="12,3 22,22 2,22" fill="#ff0040"/>
+        </svg>
+        
+        <!-- Triangles orange plus foncé -->
+        <svg class="triangle-svg large" style="top: 40%; left: 5%;">
+            <polygon points="30,10 55,50 5,50" fill="#ff6600"/>
+        </svg>
+        <svg class="triangle-svg" style="bottom: 25%; left: 45%;">
+            <polygon points="5,5 35,5 20,35" fill="#ffa500"/>
+        </svg>
+        
+        <!-- Triangles verts acides -->
+        <svg class="triangle-svg small" style="top: 80%; right: 25%;">
+            <polygon points="22,12 2,22 22,22" fill="#40ff00"/>
+        </svg>
+        <svg class="triangle-svg" style="top: 30%; left: 60%;">
+            <polygon points="35,20 5,35 35,35" fill="#40ff00"/>
+        </svg>
+        
+        <!-- Plus de triangles punchy -->
+        <svg class="triangle-svg" style="top: 65%; right: 5%;">
+            <polygon points="5,20 35,5 35,35" fill="#ff00ff"/>
+        </svg>
+        <svg class="triangle-svg small" style="bottom: 5%; left: 55%;">
+            <polygon points="2,12 22,2 22,22" fill="#00ff80"/>
+        </svg>
+        <svg class="triangle-svg" style="top: 85%; left: 35%;">
+            <polygon points="20,35 5,5 35,5" fill="#ff8000"/>
+        </svg>
+        <svg class="triangle-svg large" style="top: 55%; right: 40%;">
+            <polygon points="30,50 5,10 55,10" fill="#0088ff"/>
+        </svg>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <h1>Récital de DEM</h1>
+            <div class="subtitle">Sébastien ALTOUNIAN</div>
+            <div class="date">19 juin 2025</div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#parcours" class="nav-link">Mon Parcours</a>
+            <a href="#identite" class="nav-link">L'Identité</a>
+            <a href="#programme" class="nav-link">Programme</a>
+            <a href="#contact" class="nav-link">Contact</a>
+            <a href="#operap" class="nav-link">Opérap</a>
+            <a href="#textes" class="nav-link">Textes</a>
+        </div>
+    </nav>
+
+    <section id="parcours">
+        <div class="container">
+            <h2 class="section-title">Mon parcours</h2>
+            <div class="parcours-grid">
+                <div class="parcours-text">
+                    <h3 style="color: var(--color-primary); margin-bottom: 1rem; font-size: 1.5rem;">À la croisée des chemins</h3>
+                    <p>Depuis tout petit, je suis animé par l'envie de créer, de comprendre, de transformer. Issu d'une famille d'entrepreneurs, j'ai grandi dans les copeaux, les étincelles, les câbles et les idées : j'ai appris menuiserie, mécanique, électricité, toujours au service de projets concrets.</p>
+                    
+                    <p>Diplômé de deux master, ingénieur robotique à CPE Lyon et diplôme d'emlyon spécialisation en innovation, j'ai été enseignant-chercheur, chef d'équipe à la RoboCup. J'ai également fondé un Makerspace associatif : IDIoTsLab.</p>
+                    
+                    <p>En parallèle, j'ai découvert le chant et intégré le Conservatoire à Rayonnement Régional de Lyon où j'ai pu grandement approfondir la discipline, guidé par Claire MARBOT et Françoise AGNIEL.</p>
+                    
+                    <p><strong>Aujourd'hui, je me construis sur la base de quatre piliers : artisanat, ingénierie, innovation et musique.</strong></p>
+                </div>
+                <div class="parcours-image">
+                    <div class="profile-container">
+                        <div class="profile-image">
+                            Photo de profil artistique
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="identite">
+        <div class="container">
+            <h2 class="section-title">L'identité</h2>
+            <div class="identity-intro">
+                "J'ai conçu ce programme comme un miroir brisé, où chaque fragment reflète une façon d'être, une identité sur le soi."
+            </div>
+            <div class="parcours-text">
+                <p>La multiplicité pose fréquemment des questions d'identification. Nous cherchons souvent à catégoriser pour se rassurer et éviter l'inconnu qui perturbe. Pour moi, l'identité ne se résume pas seulement à ce que l'on fait.</p>
+                
+                <p>Ce programme explore différentes facettes de l'identité à travers la musique : l'identité blessée, celle jugée par les autres, l'identité différente, brute, celle qui devient souvenir, l'identité sociale, et enfin mon identité personnelle à travers une création originale.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="programme">
+        <div class="container">
+            <h2 class="section-title">Programme</h2>
+            <div class="works-grid">
+                <div class="work-card" onclick="openModal('bizet')">
+                    <div class="work-theme">Identité blessée</div>
+                    <h3 class="work-title">Quand la flamme de l'amour</h3>
+                    <div class="work-composer">Georges Bizet</div>
+                    <p class="work-description">Ce personnage n'est pas porté par l'amour, il est écrasé par son absence. Un vertige existentiel : peut-on rester soi-même quand on ne se sent pas aimé pour ce que l'on est ?</p>
+                    <div class="click-hint">🔍 Cliquez pour voir le détail complet</div>
+                </div>
+
+                <div class="work-card" onclick="openModal('chausson')">
+                    <div class="work-theme">Jugement et identité</div>
+                    <h3 class="work-title">L'Albatros</h3>
+                    <div class="work-composer">Ernest Chausson</div>
+                    <p class="work-description">L'albatros est un roi dans le ciel, mais un pantin sur le bateau. Ce morceau interroge notre rapport à l'identité et au jugement.</p>
+                    <div class="click-hint">🔍 Cliquez pour voir le détail complet</div>
+                </div>
+
+                <div class="work-card" onclick="openModal('schubert')">
+                    <div class="work-theme">L'identité différente</div>
+                    <h3 class="work-title">Gute Nacht</h3>
+                    <div class="work-composer">Franz Schubert</div>
+                    <p class="work-description">Il est arrivé étranger, il repart étranger — non parce qu'il vient d'ailleurs, mais parce qu'il pense autrement.</p>
+                    <div class="click-hint">🔍 Cliquez pour voir le détail complet</div>
+                </div>
+
+                <div class="work-card" onclick="openModal('williams')">
+                    <div class="work-theme">Identité brute</div>
+                    <h3 class="work-title">The Vagabond</h3>
+                    <div class="work-composer">Ralph Vaughan Williams</div>
+                    <p class="work-description">Un socle brut d'identité assumée. Son identité tient dans sa liberté nue, son mouvement, son lien direct au monde.</p>
+                    <div class="click-hint">🔍 Cliquez pour voir le détail complet</div>
+                </div>
+
+                <div class="work-card" onclick="openModal('ibert')">
+                    <div class="work-theme">Quand l'identité devient souvenir</div>
+                    <h3 class="work-title">Chanson de la Mort</h3>
+                    <div class="work-composer">Jacques Ibert</div>
+                    <p class="work-description">La disparition révèle l'empreinte : la perte donne souvent pleinement sa valeur à ce qui a été perdu. "Fantôme dans la vie, réel dans la mort."</p>
+                    <div class="click-hint">🔍 Cliquez pour voir le détail complet</div>
+                </div>
+
+                <div class="work-card" onclick="openModal('mozart')">
+                    <div class="work-theme">Identité sociale écroulée</div>
+                    <h3 class="work-title">Hai già vinta la causa</h3>
+                    <div class="work-composer">W.A. Mozart</div>
+                    <p class="work-description">Le Comte se pensait au-dessus grâce à son nom, son rang, son pouvoir. Quand l'identité se réduit à un rôle social, la moindre faille devient un gouffre.</p>
+                    <div class="click-hint">🔍 Cliquez pour voir le détail complet</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="operap">
+        <div class="container">
+            <div class="operap-section">
+                <h2 class="operap-title">Opérap</h2>
+                <div class="operap-subtitle">Mon identité : un voyage à la croisée des mondes</div>
+                <p class="operap-description">
+                    Ce projet musical repose sur la création musicale en direct, croisant voix et technologie, entre chant, voix parlée et performance live. J'utilise un logiciel de looping permettant de faire des boucles superposées afin de tisser une instrumentale. Tous les sons sont créés uniquement avec la voix, sans modifications.
+                </p>
+                <br>
+                <p class="operap-description">
+                    Cette composition est une rencontre entre plusieurs univers. J'y mêle chant lyrique, écriture, informatique, beatbox, construction, instrumentation. C'est une photo à l'instant T de qui je suis aujourd'hui : héritier de la tradition, curieux de la modernité, artisan du son et chercheur d'émotion.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="textes">
+        <div class="container">
+            <h2 class="section-title">Textes des œuvres</h2>
+            
+            <div class="text-work">
+                <h3>Quand la flamme de l'amour</h3>
+                <div class="composer">Georges Bizet</div>
+                <div class="text-content french">Quand la flamme de l'amour
+Brûle l'âme nuit et jour,
+Pour l'éteindre quelquefois,
+Sans me plaindre, moi, je bois !
+Je ris, je chante et je bois !
+
+S'il est une triste folie,
+C'est celle d'un pauvre amoureux
+Qu'un regard de femme humilie,
+Qu'un mot peut rendre malheureux.
+
+Hélas ! Quand on aime sans espoir,
+Le ciel même devient noir.
+Eh ! L'hôtesse ! Mon flacon !
+Que j'y laisse ma raison…</div>
+            </div>
+
+            <div class="text-work">
+                <h3>L'Albatros</h3>
+                <div class="composer">Ernest Chausson</div>
+                <div class="text-content french">Souvent, pour s'amuser, les hommes d'équipage
+Prennent des albatros, vastes oiseaux des mers,
+Qui suivent, indolents compagnons de voyage,
+Le navire glissant sur les gouffres amers.
+
+A peine les ont-ils déposés sur les planches,
+Que ces rois de l'azur, maladroits et honteux,
+Laissent piteusement leurs grandes ailes blanches
+Comme des avirons traîner à côté d'eux.
+
+Le Poète est semblable au prince des nuées
+Qui hante la tempête et se rit de l'archer ;
+Exilé sur le sol au milieu des huées,
+Ses ailes de géant l'empêchent de marcher.</div>
+            </div>
+
+            <div class="text-work">
+                <h3>Gute Nacht</h3>
+                <div class="composer">Franz Schubert</div>
+                <div class="text-original">
+                    <h4>Texte original (Allemand)</h4>
+                    <div class="text-content original">Fremd bin ich eingezogen,
+Fremd zieh' ich wieder aus.
+Der Mai war mir gewogen
+Mit manchem Blumenstrauss.
+Das Mädchen sprach von Liebe,
+Die Mutter gar von Eh'
+Nun ist die Welt so trübe,
+Der Weg gehüllt in Schnee.
+
+Ich kann zu meiner Reisen
+Nicht wählen mit der Zeit:
+Muss selbst den Weg mir weisen
+In dieser Dunkelheit.
+Es zieht ein Mondenschatten
+Als mein Gefährte mit,
+Und auf den weissen Matten
+Such' ich des Wildes Tritt.
+
+Was soll ich länger weilen,
+Dass man mich trieb' hinaus?
+Lass irre Hunde heulen
+Vor ihres Herren Haus!
+Die Liebe liebt das Wandern,
+Gott hat sie so gemacht
+Von einem zu dem andern
+Fein Liebchen, gute Nacht.
+
+Will dich im Traum nicht stören,
+Wär' Schad' um deine Ruh',
+Sollst meinen Tritt nicht hören
+Sacht, sacht die Türe zu!
+Schreib' im Vorübergehen
+An's Tor dir gute Nacht,
+Damit du mögest sehen,
+An dich hab' ich gedacht.</div>
+                </div>
+                <div class="text-translation">
+                    <h4>Traduction française</h4>
+                    <div class="text-content french">Étranger je suis arrivé,
+Étranger je repars.
+Le mois de mai
+M'avait bercé de maints bouquets de fleurs.
+La jeune fille parlait d'amour,
+La mère même de mariage,
+Aujourd'hui le monde est si gris,
+Le chemin recouvert de neige.
+
+De mon départ en voyage
+Je ne peux choisir le moment,
+Je dois moi-même trouver le chemin
+En cette obscurité.
+Une ombre lunaire me suit
+Comme mon compagnon,
+Et sur le blanc manteau
+Je cherche les traces d'animaux.
+
+Pourquoi devrais-je attendre encore
+Que l'on me mette dehors ?
+Laissez les chiens fous hurler
+Devant la maison de leurs maîtres;
+L'amour aime à cheminer
+Dieu l'a ainsi fait
+De l'un à l'autre.
+Douce bien-aimée, bonne nuit !
+
+En tes rêves je ne te dérangerai point,
+Ce serait dommage, en ton repos,
+Tu ne devrais pas entendre mes pas,
+Doucement (x2), les portes sont fermées!
+En passant, j'écris seulement
+"Bonne nuit" sur le portail,
+Pour que tu puisses voir,
+Que j'ai pensé à toi.</div>
+                </div>
+            </div>
+
+            <div class="text-work">
+                <h3>The Vagabond</h3>
+                <div class="composer">Ralph Vaughan Williams</div>
+                <div class="text-original">
+                    <h4>Texte original (Anglais)</h4>
+                    <div class="text-content original">Give to me the life I love,
+Let the lave go by me,
+Give the jolly heaven above
+And the byway nigh me.
+Bed in the bush with stars to see,
+Bread I dip in the river –
+There's the life for a man like me,
+There's the life forever.
+
+Let the blow fall soon or late,
+Let what will be o'er me;
+Give the face of earth around,
+And the road before me.
+Wealth I seek not, hope nor love,
+Nor a friend to know me;
+All I seek, the heaven above
+And the road below me.</div>
+                </div>
+                <div class="text-translation">
+                    <h4>Traduction française</h4>
+                    <div class="text-content french">Donne-moi la vie que j'aime,
+Que le torrent passe à côté,
+Donne-moi le joyeux ciel au-dessus
+Et le sentier solitaire près de moi.
+Un lit dans les buissons, les étoiles pour décor,
+Du pain trempé dans la rivière –
+Voilà la vie pour un homme comme moi,
+Voilà la vie, pour toujours.
+
+Que le coup tombe tôt ou tard,
+Que le destin suive son cours sur moi ;
+Donne-moi la terre autour de moi,
+Et la route devant mes pas.
+Je ne cherche ni richesse, ni espoir, ni amour,
+Ni même un ami qui me connaisse ;
+Tout ce que je demande, c'est le ciel au-dessus
+Et la route sous mes pieds.</div>
+                </div>
+            </div>
+
+            <div class="text-work">
+                <h3>Chanson de la Mort</h3>
+                <div class="composer">Jacques Ibert</div>
+                <div class="text-content french">Ne pleure pas Sancho, ne pleure pas, mon bon.
+Ton maître n'est pas mort.
+Il n'est pas loin de toi.
+Il vit dans une île heureuse
+Où tout est pur et sans mensonges.
+Dans l'île enfin trouvée où tu viendras un jour.
+Dans l'île désirée, ô mon ami Sancho !
+
+Les livres sont brûlés et font un tas de cendres.
+Si tous les livres m'ont tué,
+Il suffit d'un pour que je vive :
+Fantôme dans la vie, et réel dans la mort.
+Tel est l'étrange sort du pauvre Don Quichotte.</div>
+            </div>
+
+            <div class="text-work">
+                <h3>Hai già vinta la causa</h3>
+                <div class="composer">W.A. Mozart</div>
+                <div class="text-original">
+                    <h4>Texte original (Italien)</h4>
+                    <div class="text-content original">Hai già vinta la causa! Cosa sento!
+In qual laccio cadea? Perfidi, io voglio...io voglio di tal modo
+punirvi, a piacer mio la sentenza sarà... Ma s'ei pagasse la vecchia
+pretendente? Pagarla! In qual maniera? E poi v'è Antonio che
+all'incognito Figaro ricusa di dare una nipote in matrimonio.
+Coltivando l'orgoglio di questo mentecatto... tutto giova a un
+raggiro... il colpo è fatto.
+
+Vedrò, mentr'io sospiro,
+felice un servo mio!
+E un ben che invan desio,
+ei posseder dovrà?
+Vedrò per man d'amore
+unita a un vile oggetto
+chi in me destò un affetto
+che per me poi non ha?
+
+Ah no, lasciarti in pace,
+non vo' questo contento,
+tu non nascesti, audace,
+per dare a me tormento,
+e forse ancor per ridere,
+di mia infelicità!
+Già la speranza sola
+delle vendette mie
+quest'anima consola,
+e giubilar mi fa!</div>
+                </div>
+                <div class="text-translation">
+                    <h4>Traduction française</h4>
+                    <div class="text-content french">Tu as déjà gagné le procès ? Qu'entends-je ! Dans quel piège j'allais
+tomber ?! Perfides ! Je vais.. Je vais vous punir de telle façon... La
+sentence sera a mon goût ! Mais s'il payait la vieille prétendante ?
+La payer ? Comment ? Et puis Antonio refuse de marier sa nièce à
+un Figaro né de parents inconnus. Cultiver la vanité de cet idiot...
+Tout concours à ma machination.. Le coup est fait !
+
+Pendant que je soupire,
+Je verrais mon valet heureux.
+Un bien qu'en vain je désire,
+il devrait le posséder ?
+Je verrais l'amour unir à un vil
+personnage
+celle qui a mon amour
+et qui pour moi n'en a pas.
+
+A non, je ne te laisserai pas en paix.
+Je ne veux pas ce bonheur.
+Tu n'es pas né, insolent,
+pour me tourmenter
+et peut être en outre, pour rire de
+mon malheur ?
+Seul l'espoir de mes vengeances,
+console mon âme
+et me fait jubiler.</div>
+                </div>
+            </div>
+
+            <div class="text-work">
+                <h3>Opérap</h3>
+                <div class="composer">Sébastien ALTOUNIAN</div>
+                <div class="text-content french">Texte à venir
+
+[Cette création originale sera dévoilée lors du récital]</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals pour chaque œuvre avec contenu complet du livret -->
+    
+    <!-- Modal Bizet -->
+    <div id="bizet-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('bizet')">&times;</span>
+                <h2>Quand la flamme de l'amour</h2>
+                <div class="composer">Georges Bizet</div>
+            </div>
+            <div class="modal-body">
+                <div class="work-details">
+                    <p><strong>Composé en 1866, La Jolie fille de Perth est un opéra en quatre actes de Georges Bizet, inspiré d'un roman de Walter Scott. Dans cet air, un homme exprime un amour profond et sans espoir.</strong></p>
+                </div>
+                
+                <div class="work-analysis">
+                    <h3>Identité blessée : quand l'amour devient besoin d'oubli</h3>
+                    <p>Ce personnage n'est pas porté par l'amour, il est écrasé par son absence.</p>
+                    <p>Il ne se sent exister qu'à travers un amour qu'il ne reçoit pas en retour. <strong>Son identité seule ne lui suffit plus.</strong> Il tente d'oublier, de noyer la douleur dans le vin et les chansons, de fuir la réalité.</p>
+                    <p>Ce morceau ouvre le récital sur un vertige existentiel : <strong>peut-on rester soi-même quand on ne se sent pas aimé pour ce que l'on est ?</strong> Pour Ralph, c'est le vertige, l'oubli, la fuite de soi.</p>
+                </div>
+
+                <div class="work-texts">
+                    <div class="text-section">
+                        <h4>Texte complet</h4>
+                        <div class="text-content">Quand la flamme de l'amour
+Brûle l'âme nuit et jour,
+Pour l'éteindre quelquefois,
+Sans me plaindre, moi, je bois !
+Je ris, je chante et je bois !
+
+S'il est une triste folie,
+C'est celle d'un pauvre amoureux
+Qu'un regard de femme humilie,
+Qu'un mot peut rendre malheureux.
+
+Hélas ! Quand on aime sans espoir,
+Le ciel même devient noir.
+Eh ! L'hôtesse ! Mon flacon !
+Que j'y laisse ma raison…</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Chausson -->
+    <div id="chausson-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('chausson')">&times;</span>
+                <h2>L'Albatros</h2>
+                <div class="composer">Ernest Chausson</div>
+            </div>
+            <div class="modal-body">
+                <div class="work-details">
+                    <p><strong>L'Albatros est l'un des poèmes les plus célèbres de Baudelaire, tiré du recueil Les Fleurs du Mal (1857).</strong></p>
+                    <p>Ernest Chausson en compose une mise en musique sobre et fidèle au rythme du poème, sans effet lyrique superflu. Le texte raconte comment des marins capturent de grands albatros et rient de leur maladresse une fois posés sur le pont du navire.</p>
+                </div>
+                
+                <div class="work-analysis">
+                    <h3>Jugement et identité : quand le cadre inverse les rôles</h3>
+                    <p>L'albatros est un roi dans le ciel, mais un pantin sur le bateau. Il n'a pas changé — <strong>seul le regard des autres a basculé.</strong></p>
+                    <p>Comme le dit la célèbre citation (attribuée à Einstein) : "Si vous jugez un poisson à sa capacité à grimper à un arbre, il passera sa vie à croire qu'il est stupide."</p>
+                    <p>Ce morceau interroge notre rapport à l'identité et au jugement. Il nous rappelle que <strong>chacun peut être sublime dans un espace, maladroit dans un autre.</strong> Que nos cadres de référence ne sont pas universels. Et que si le vent change…</p>
+                    <p>Propulsé dans les airs, le matelot pourrait-il devenir l'albatros, et l'albatros, le matelot ?</p>
+                </div>
+
+                <div class="work-texts">
+                    <div class="text-section">
+                        <h4>Texte complet</h4>
+                        <div class="text-content">Souvent, pour s'amuser, les hommes d'équipage
+Prennent des albatros, vastes oiseaux des mers,
+Qui suivent, indolents compagnons de voyage,
+Le navire glissant sur les gouffres amers.
+
+A peine les ont-ils déposés sur les planches,
+Que ces rois de l'azur, maladroits et honteux,
+Laissent piteusement leurs grandes ailes blanches
+Comme des avirons traîner à côté d'eux.
+
+Le Poète est semblable au prince des nuées
+Qui hante la tempête et se rit de l'archer ;
+Exilé sur le sol au milieu des huées,
+Ses ailes de géant l'empêchent de marcher.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Schubert -->
+    <div id="schubert-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('schubert')">&times;</span>
+                <h2>Gute Nacht</h2>
+                <div class="composer">Franz Schubert</div>
+            </div>
+            <div class="modal-body">
+                <div class="work-details">
+                    <p><strong>Winterreise (Le voyage d'hiver) est un cycle de 24 lieder allemands composés par Franz Schubert en 1827 sur des poèmes de Wilhelm Müller.</strong></p>
+                    <p>Gute Nacht, premier lied du cycle, ouvre le chemin du voyageur qui quitte la maison aimée dans la nuit. Il part seul, à travers une nature froide et silencieuse, et laisse un simple mot sur la porte : "Bonne nuit".</p>
+                </div>
+                
+                <div class="work-analysis">
+                    <h3>L'identité différente : penser autrement, passer en silence</h3>
+                    <p>Il est arrivé étranger, il repart étranger — non parce qu'il vient d'ailleurs, mais parce qu'il pense autrement.</p>
+                    <p>Il a apporté un souffle nouveau, une autre manière d'aimer, de voir, de vivre. Certains l'ont accueilli, une jeune fille, peut-être une famille, et il y a eu rencontre, échange, croissance. D'autres n'ont pas compris, ont rejeté, ont aboyé. Tant pis.</p>
+                    <p>Mais il ne part pas amer. Il marche dans la nuit avec la lune pour compagne, trouvant dans la solitude la beauté discrète de ce qui reste fidèle. Il ne force rien, ne claque pas de porte. Il part simplement, dignement, et laisse un mot : "Bonne nuit".</p>
+                    <p>Car il sait qu'il a laissé une trace, et que ceux qui ont su écouter en garderont quelque chose.</p>
+                    <p>L'étranger ici, c'est celui qui pense autrement. Et Gute Nacht, une leçon douce sur l'humilité, la discrétion, et l'importance de rester soi.</p>
+                </div>
+
+                <div class="work-texts">
+                    <div class="text-section">
+                        <h4>Texte original (Allemand)</h4>
+                        <div class="text-content">Fremd bin ich eingezogen,
+Fremd zieh' ich wieder aus.
+Der Mai war mir gewogen
+Mit manchem Blumenstrauss.
+Das Mädchen sprach von Liebe,
+Die Mutter gar von Eh'
+Nun ist die Welt so trübe,
+Der Weg gehüllt in Schnee.
+
+Ich kann zu meiner Reisen
+Nicht wählen mit der Zeit:
+Muss selbst den Weg mir weisen
+In dieser Dunkelheit.
+Es zieht ein Mondenschatten
+Als mein Gefährte mit,
+Und auf den weissen Matten
+Such' ich des Wildes Tritt.
+
+Was soll ich länger weilen,
+Dass man mich trieb' hinaus?
+Lass irre Hunde heulen
+Vor ihres Herren Haus!
+Die Liebe liebt das Wandern,
+Gott hat sie so gemacht
+Von einem zu dem andern
+Fein Liebchen, gute Nacht.
+
+Will dich im Traum nicht stören,
+Wär' Schad' um deine Ruh',
+Sollst meinen Tritt nicht hören
+Sacht, sacht die Türe zu!
+Schreib' im Vorübergehen
+An's Tor dir gute Nacht,
+Damit du mögest sehen,
+An dich hab' ich gedacht.</div>
+                    </div>
+                    <div class="text-section">
+                        <h4>Traduction française</h4>
+                        <div class="text-content">Étranger je suis arrivé,
+Étranger je repars.
+Le mois de mai
+M'avait bercé de maints bouquets de fleurs.
+La jeune fille parlait d'amour,
+La mère même de mariage,
+Aujourd'hui le monde est si gris,
+Le chemin recouvert de neige.
+
+De mon départ en voyage
+Je ne peux choisir le moment,
+Je dois moi-même trouver le chemin
+En cette obscurité.
+Une ombre lunaire me suit
+Comme mon compagnon,
+Et sur le blanc manteau
+Je cherche les traces d'animaux.
+
+Pourquoi devrais-je attendre encore
+Que l'on me mette dehors ?
+Laissez les chiens fous hurler
+Devant la maison de leurs maîtres;
+L'amour aime à cheminer
+Dieu l'a ainsi fait
+De l'un à l'autre.
+Douce bien-aimée, bonne nuit !
+
+En tes rêves je ne te dérangerai point,
+Ce serait dommage, en ton repos,
+Tu ne devrais pas entendre mes pas,
+Doucement (x2), les portes sont fermées!
+En passant, j'écris seulement
+"Bonne nuit" sur le portail,
+Pour que tu puisses voir,
+Que j'ai pensé à toi.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Williams -->
+    <div id="williams-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('williams')">&times;</span>
+                <h2>The Vagabond</h2>
+                <div class="composer">Ralph Vaughan Williams</div>
+            </div>
+            <div class="modal-body">
+                <div class="work-details">
+                    <p><strong>Songs of Travel est un cycle de neuf mélodies composé par Ralph Vaughan Williams sur des poèmes de Robert Louis Stevenson.</strong></p>
+                    <p>The Vagabond ouvre ce cycle comme une déclaration d'indépendance du marcheur solitaire, dans un style direct et solide, à la manière d'un hymne populaire.</p>
+                </div>
+                
+                <div class="work-analysis">
+                    <h3>Identité brute : être soi sans condition</h3>
+                    <p>Après les questions, les doutes et les départs, The Vagabond s'impose comme un <strong>socle brut d'identité assumée.</strong> Il ne répond pas aux autres. Il ne part pas. Il ne revient pas. Il est là.</p>
+                    <p>Ici, pas de passé, pas de regrets, pas de justification, ni de validation extérieure. Pas besoin non plus d'être aimé, reconnu, compris. Il est son propre centre, son propre rythme, <strong>sa propre maison.</strong></p>
+                    <p>Le vagabond est. Il avance. Il dort sous les étoiles, marche sous la pluie, vit avec le rythme de la nature. Il ne cherche ni refuge ni attachement : son identité tient dans <strong>sa liberté nue, son mouvement, son lien direct au monde.</strong> C'est une osmose avec le vivant, un effacement volontaire de l'ego, où l'identité cesse d'être un poids ou une construction, pour devenir un état de présence.</p>
+                </div>
+
+                <div class="work-texts">
+                    <div class="text-section">
+                        <h4>Texte original (Anglais)</h4>
+                        <div class="text-content">Give to me the life I love,
+Let the lave go by me,
+Give the jolly heaven above
+And the byway nigh me.
+Bed in the bush with stars to see,
+Bread I dip in the river –
+There's the life for a man like me,
+There's the life forever.
+
+Let the blow fall soon or late,
+Let what will be o'er me;
+Give the face of earth around,
+And the road before me.
+Wealth I seek not, hope nor love,
+Nor a friend to know me;
+All I seek, the heaven above
+And the road below me.</div>
+                    </div>
+                    <div class="text-section">
+                        <h4>Traduction française</h4>
+                        <div class="text-content">Donne-moi la vie que j'aime,
+Que le torrent passe à côté,
+Donne-moi le joyeux ciel au-dessus
+Et le sentier solitaire près de moi.
+Un lit dans les buissons, les étoiles pour décor,
+Du pain trempé dans la rivière –
+Voilà la vie pour un homme comme moi,
+Voilà la vie, pour toujours.
+
+Que le coup tombe tôt ou tard,
+Que le destin suive son cours sur moi ;
+Donne-moi la terre autour de moi,
+Et la route devant mes pas.
+Je ne cherche ni richesse, ni espoir, ni amour,
+Ni même un ami qui me connaisse ;
+Tout ce que je demande, c'est le ciel au-dessus
+Et la route sous mes pieds.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ibert -->
+    <div id="ibert-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('ibert')">&times;</span>
+                <h2>Chanson de la Mort</h2>
+                <div class="composer">Jacques Ibert</div>
+            </div>
+            <div class="modal-body">
+                <div class="work-details">
+                    <p><strong>Composée pour le film Don Quichotte de G.W. Pabst, cette mélodie conclut un cycle de quatre chansons écrites pour Feodor Chaliapine.</strong> Don Quichotte, en fin de vie, s'adresse à son fidèle Sancho : il lui dit de ne pas pleurer, car il n'est pas mort, seulement ailleurs. Dans une île pure, débarrassée du mensonge.</p>
+                </div>
+                
+                <div class="work-analysis">
+                    <h3>Quand l'identité devient souvenir : la vie vue depuis l'autre rive</h3>
+                    <p>Don Quichotte n'a jamais su s'il était dans le vrai. Il a suivi ses idéaux, sans certitude, avec sincérité. Ce n'est qu'au moment de la mort — dans "l'île enfin trouvée" — qu'une paix se dessine. Ce n'est pas la reconnaissance qui donne du sens à ce qu'il a été, mais la fidélité à sa propre ligne. Une cohérence intérieure, poursuivie jusqu'au bout.</p>
+                    <p><strong>On ne mesure pas toujours ce que l'on a été tant qu'on est encore là.</strong></p>
+                    <p>C'est la disparition qui révèle l'empreinte : <strong>la perte donne souvent pleinement sa valeur à ce qui a été perdu.</strong> "Fantôme dans la vie, réel dans la mort."</p>
+                    <p>Et cette trace, même incomprise, laisse une empreinte, une mémoire, qui ne vit que dans les autres. Il continue d'exister dans les pensées de ceux qui ont partagé son existence. Dans le souvenir de Sancho. <strong>Dans le livre qui reste quand tous les autres ont brûlé.</strong></p>
+                    <p>C'est une vision apaisée, fraternelle : être, c'est aussi <strong>être avec, être porté par la mémoire, exister dans le cœur des autres.</strong></p>
+                </div>
+
+                <div class="work-texts">
+                    <div class="text-section">
+                        <h4>Texte complet</h4>
+                        <div class="text-content">Ne pleure pas Sancho, ne pleure pas, mon bon.
+Ton maître n'est pas mort.
+Il n'est pas loin de toi.
+Il vit dans une île heureuse
+Où tout est pur et sans mensonges.
+Dans l'île enfin trouvée où tu viendras un jour.
+Dans l'île désirée, ô mon ami Sancho !
+
+Les livres sont brûlés et font un tas de cendres.
+Si tous les livres m'ont tué,
+Il suffit d'un pour que je vive :
+Fantôme dans la vie, et réel dans la mort.
+Tel est l'étrange sort du pauvre Don Quichotte.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Mozart -->
+    <div id="mozart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('mozart')">&times;</span>
+                <h2>Hai già vinta la causa</h2>
+                <div class="composer">W.A. Mozart</div>
+            </div>
+            <div class="modal-body">
+                <div class="work-details">
+                    <p><strong>Dans cet air du troisième acte des Noces de Figaro, le Comte Almaviva découvre que Figaro, Suzanne et la Comtesse conspirent contre lui.</strong> Il comprend qu'il perd le contrôle sur Suzanne, qu'il convoitait, et que son autorité vacille. Il explose : <strong>il est furieux, humilié, prêt à se venger.</strong> Cet air marque un basculement dramatique dans l'opéra, révélant un Comte moins séducteur que vulnérable.</p>
+                </div>
+                
+                <div class="work-analysis">
+                    <h3>Identité sociale écroulée : quand le titre ne suffit plus à être</h3>
+                    <p>Le Comte se pensait au-dessus. Il portait un nom, un rang, un pouvoir — et tout cela définissait ce qu'il croyait être. Mais dans cet instant, tout vacille. Il est défié, contourné, mis à nu par des "inférieurs" et il ne le supporte pas.</p>
+                    <p>Sa colère n'est pas froide, ni stratégique : c'est <strong>la panique d'un homme qui sent que ce qu'il croyait inattaquable (son autorité, son désir, son image) lui échappe.</strong> Et quand <strong>l'identité se réduit à un rôle social, la moindre faille devient un gouffre.</strong></p>
+                    <p>"Si je ne peux avoir ce que je veux, je me vengerai. Je me consolerai dans l'humiliation de l'autre."</p>
+                    <p>Dans ce récital, cet air réintroduit le théâtre après une séquence plus intime : mais c'est un théâtre de vérité, où le masque du noble tombe, et où ne reste <strong>qu'un homme piégé par l'image de lui-même.</strong></p>
+                </div>
+
+                <div class="work-texts">
+                    <div class="text-section">
+                        <h4>Texte original (Italien)</h4>
+                        <div class="text-content">Hai già vinta la causa! Cosa sento!
+In qual laccio cadea? Perfidi, io voglio...io voglio di tal modo
+punirvi, a piacer mio la sentenza sarà... Ma s'ei pagasse la vecchia
+pretendente? Pagarla! In qual maniera? E poi v'è Antonio che
+all'incognito Figaro ricusa di dare una nipote in matrimonio.
+Coltivando l'orgoglio di questo mentecatto... tutto giova a un
+raggiro... il colpo è fatto.
+
+Vedrò, mentr'io sospiro,
+felice un servo mio!
+E un ben che invan desio,
+ei posseder dovrà?
+Vedrò per man d'amore
+unita a un vile oggetto
+chi in me destò un affetto
+che per me poi non ha?
+
+Ah no, lasciarti in pace,
+non vo' questo contento,
+tu non nascesti, audace,
+per dare a me tormento,
+e forse ancor per ridere,
+di mia infelicità!
+Già la speranza sola
+delle vendette mie
+quest'anima consola,
+e giubilar mi fa!</div>
+                    </div>
+                    <div class="text-section">
+                        <h4>Traduction française</h4>
+                        <div class="text-content">Tu as déjà gagné le procès ? Qu'entends-je ! Dans quel piège j'allais
+tomber ?! Perfides ! Je vais.. Je vais vous punir de telle façon... La
+sentence sera a mon goût ! Mais s'il payait la vieille prétendante ?
+La payer ? Comment ? Et puis Antonio refuse de marier sa nièce à
+un Figaro né de parents inconnus. Cultiver la vanité de cet idiot...
+Tout concours à ma machination.. Le coup est fait !
+
+Pendant que je soupire,
+Je verrais mon valet heureux.
+Un bien qu'en vain je désire,
+il devrait le posséder ?
+Je verrais l'amour unir à un vil
+personnage
+celle qui a mon amour
+et qui pour moi n'en a pas.
+
+A non, je ne te laisserai pas en paix.
+Je ne veux pas ce bonheur.
+Tu n'es pas né, insolent,
+pour me tourmenter
+et peut être en outre, pour rire de
+mon malheur ?
+Seul l'espoir de mes vengeances,
+console mon âme
+et me fait jubiler.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Remerciements</h2>
+            <div style="max-width: 800px; margin: 0 auto 3rem; text-align: left; color: white; line-height: 1.8;">
+                <p>Je remercie <strong>mes parents</strong> pour leur éducation, leur soutien, les valeurs qu'ils m'ont transmises, et tout ce qu'ils m'ont appris.</p>
+                
+                <p>Merci à <strong>Alice BORDILLON</strong>, pour m'avoir mis sur la voie du chant, et m'avoir toujours encouragé à poursuivre cette discipline.</p>
+                
+                <p>Merci également à <strong>Michela BERTAGNOLLI</strong>, ma première professeure de chant, qui m'a accompagné dans la découverte de cet art. La vie me fait un clin d'œil en la plaçant aujourd'hui dans le jury de mon DEM et cela me touche profondément.</p>
+                
+                <p>Merci à mes professeurs, particulièrement <strong>Claire MARBOT</strong>, ma professeure de chant, <strong>Françoise AGNIEL</strong>, cheffe de chant, pour leur exigence bienveillante, leur accompagnement attentif, et tout ce qu'elles m'ont permis de développer depuis mon entrée au Conservatoire.</p>
+                
+                <p>Une grande fierté de faire équipe avec <strong>Ninnog, Léa, Aurel et Annaelle, "Les Opéras Miniatures"</strong>. Nous vivons cette belle expérience et portons notre vision de l'opéra, avec humilité et professionnalisme, dans une belle complicité.</p>
+                
+                <p>Merci à <strong>Julie FABBRI</strong>, pour m'avoir aidé à construire, puis assumer, la personne que je suis.</p>
+                
+                <p>Merci à <strong>Jeoffrey, Julien, Valentin, Elodie, Antoine…</strong> et tous les autres, pour leur amitié et soutien indéfectible. Peu importe la "casquette" que je porte, vous me voyez pour qui je suis, et c'est précieux.</p>
+            </div>
+            
+            <h2 class="section-title" style="color: white; margin-top: 4rem;">Contact & Projets</h2>
+            <div class="contact-links">
+                <div class="contact-card">
+                    <h3>Site du DEM</h3>
+                    <a href="https://deathura.github.io/dem">deathura.github.io/dem</a>
+                </div>
+                <div class="contact-card">
+                    <h3>Site Personnel</h3>
+                    <a href="https://deathura.github.io">deathura.github.io</a>
+                </div>
+                <div class="contact-card">
+                    <h3>IDIoTsLab</h3>
+                    <a href="https://idiotslab.fr">idiotslab.fr</a>
+                </div>
+                <div class="contact-card">
+                    <h3>Les Opéras Miniatures</h3>
+                    <a href="https://lesoperasminiatures.fr">lesoperasminiatures.fr</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Fonctions pour les modals
+        function openModal(workId) {
+            document.getElementById(workId + '-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Empêche le scroll de la page
+        }
+
+        function closeModal(workId) {
+            document.getElementById(workId + '-modal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Remet le scroll
+        }
+
+        // Fermer les modals en cliquant à l'extérieur
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Fermer avec la touche Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    if (modal.style.display === 'block') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add entrance animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all work cards and other elements
+        document.querySelectorAll('.work-card, .parcours-text, .operap-section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Animate triangles SVG
+        function animateTriangles() {
+            const triangles = document.querySelectorAll('.triangle-svg');
+            triangles.forEach((triangle, index) => {
+                const randomDelay = Math.random() * 2;
+                triangle.style.animationDelay = `${randomDelay}s`;
+                triangle.style.animationDuration = `${6 + Math.random() * 4}s`;
+            });
+        }
+
+        animateTriangles();
+    </script>
+</body>
 </html>
