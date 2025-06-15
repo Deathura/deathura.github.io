@@ -1,14 +1,14 @@
-<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Récital de DEM - Sébastien ALTOUNIAN</title>
     <style>
+        /* Previous color #C50606 (rouge) #0620FB (bleu) #e0a80b (jaune) - Bleu clair et saumon (#8FADD1 & #D76D81)*/
         :root {
-            --color-primary: #ffa500;    /* Orange vif - Modifiable facilement */
-            --color-secondary: #0088ff;  /* Bleu foncé - Modifiable facilement */
-            --color-accent: #00ff00;     /* Vert lime */
+            --color-primary: #ff8c00;    /* Orange vif - Modifiable facilement */
+            --color-secondary: #0088ff;  /* Bleu foncé - Modifiable facilement (sav : #0088ff) */
+            --color-accent: #04ca46;     /* Vert */
         }
 
         * {
@@ -60,11 +60,11 @@
         }
 
         header {
-            background: linear-gradient(135deg, rgba(255,165,0,0.9), rgba(0,136,255,0.9));
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            /* background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); */
+            background-image: url("ressources/bandeau_triangle.png");
             padding: 2rem 0;
             text-align: center;
-            color: white;
+            color: rgb(255, 255, 255);
             position: relative;
             overflow: hidden;
         }
@@ -109,9 +109,52 @@
             margin: 0 auto;
             display: flex;
             justify-content: center;
+            align-items: center;
             flex-wrap: wrap;
             gap: 2rem;
             padding: 0 2rem;
+            position: relative;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            position: absolute;
+            right: 2rem;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            width: 100%;
         }
 
         .nav-link {
@@ -530,7 +573,7 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(135deg, #ffa500, #0088ff, #00ff00);
+            background: linear-gradient(135deg, #ffa500, #0088ff, #04ca46);
         }
 
         .text-work h3 {
@@ -572,6 +615,52 @@
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .subtitle { font-size: 1.4rem; }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 1rem;
+                margin-top: 1rem;
+                background: rgba(255,255,255,0.98);
+                padding: 1rem 0;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+                animation: slideDown 0.3s ease-out;
+            }
+            
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .nav-link {
+                text-align: center;
+                width: 100%;
+                padding: 1rem;
+                margin: 0;
+            }
+            
             .parcours-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -582,10 +671,6 @@
             }
             .works-grid {
                 grid-template-columns: 1fr;
-            }
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
             }
             .operap-section {
                 padding: 2rem;
@@ -702,12 +787,19 @@
 
     <nav>
         <div class="nav-container">
-            <a href="#parcours" class="nav-link">Mon Parcours</a>
-            <a href="#identite" class="nav-link">L'Identité</a>
-            <a href="#programme" class="nav-link">Programme</a>
-            <a href="#contact" class="nav-link">Contact</a>
-            <a href="#operap" class="nav-link">Opérap</a>
-            <a href="#textes" class="nav-link">Textes</a>
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="#parcours" class="nav-link">Mon Parcours</a>
+                <a href="#identite" class="nav-link">L'Identité</a>
+                <a href="#programme" class="nav-link">Programme</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <!-- <a href="#operap" class="nav-link">Opérap</a> -->
+                <a href="#textes" class="nav-link">Textes</a>
+            </div>
         </div>
     </nav>
 
@@ -728,7 +820,8 @@
                 <div class="parcours-image">
                     <div class="profile-container">
                         <div class="profile-image">
-                            Photo de profil artistique
+                            <img src="ressources/photo_sebastien.jpg"  alt="Photo Sébastien" />
+
                         </div>
                     </div>
                 </div>
@@ -1074,9 +1167,7 @@ et me fait jubiler.</div>
             <div class="text-work">
                 <h3>Opérap</h3>
                 <div class="composer">Sébastien ALTOUNIAN</div>
-                <div class="text-content french">Texte à venir
-
-[Cette création originale sera dévoilée lors du récital]</div>
+                <div class="text-content french">Texte à venir</div>
             </div>
         </div>
     </section>
@@ -1515,6 +1606,36 @@ et me fait jubiler.</div>
     </section>
 
     <script>
+        // Menu hamburger pour mobile
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        }
+
+        // Fermer le menu quand on clique sur un lien
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const hamburger = document.querySelector('.hamburger');
+                const navLinks = document.querySelector('.nav-links');
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Fermer le menu si on clique à l'extérieur
+        document.addEventListener('click', (e) => {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
         // Fonctions pour les modals
         function openModal(workId) {
             document.getElementById(workId + '-modal').style.display = 'block';
