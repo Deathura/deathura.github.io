@@ -6,9 +6,9 @@
     <style>
         /* Previous color #C50606 (rouge) #0620FB (bleu) #e0a80b (jaune) - Bleu clair et saumon (#8FADD1 & #D76D81)*/
         :root {
-            --color-primary: #ff8c00;    /* Orange vif - Modifiable facilement */
-            --color-secondary: #0088ff;  /* Bleu foncé - Modifiable facilement (sav : #0088ff) */
-            --color-accent: #04ca46;     /* Vert */
+            --color-primary: #0088ff;    /* Orange vif - Modifiable facilement (sav : ff8c00) */
+            --color-secondary: #ff8c00;  /* Bleu foncé - Modifiable facilement (sav : #0088ff) */
+            --color-accent: #d30303;     /* Vert (sav : #04ca46*/
         }
 
         * {
@@ -169,7 +169,8 @@
         }
 
         .nav-link:hover {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            /* background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); */
+            background: var(--color-secondary);
             color: white;
             transform: translateY(-2px);
         }
@@ -231,7 +232,7 @@
             border-radius: 50%;
             overflow: hidden;
             position: relative;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-secondary));
             padding: 5px;
             animation: float 3s ease-in-out infinite;
         }
@@ -283,7 +284,7 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-secondary));
         }
 
         .work-card:hover {
@@ -533,7 +534,7 @@
         }
 
         .contact-card a:hover {
-            color: #4e8bcd;
+            color: #ff8c00;
         }
 
         @keyframes slideInDown {
@@ -573,7 +574,7 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(135deg, #ffa500, #0088ff, #04ca46);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-secondary));
         }
 
         .text-work h3 {
@@ -666,8 +667,8 @@
                 gap: 2rem;
             }
             .profile-container {
-                width: 250px;
-                height: 250px;
+                width: 300px;
+                height: 300px;
             }
             .works-grid {
                 grid-template-columns: 1fr;
@@ -796,9 +797,9 @@
                 <a href="#parcours" class="nav-link">Mon Parcours</a>
                 <a href="#identite" class="nav-link">L'Identité</a>
                 <a href="#programme" class="nav-link">Programme</a>
+                <a href="#textes" class="nav-link">Textes</a>
                 <a href="#contact" class="nav-link">Contact</a>
                 <!-- <a href="#operap" class="nav-link">Opérap</a> -->
-                <a href="#textes" class="nav-link">Textes</a>
             </div>
         </div>
     </nav>
@@ -809,13 +810,15 @@
             <div class="parcours-grid">
                 <div class="parcours-text">
                     <h3 style="color: var(--color-primary); margin-bottom: 1rem; font-size: 1.5rem;">À la croisée des chemins</h3>
-                    <p>Depuis tout petit, je suis animé par l'envie de créer, de comprendre, de transformer. Issu d'une famille d'entrepreneurs, j'ai grandi dans les copeaux, les étincelles, les câbles et les idées : j'ai appris menuiserie, mécanique, électricité, toujours au service de projets concrets.</p>
-                    
-                    <p>Diplômé de deux master, ingénieur robotique à CPE Lyon et diplôme d'emlyon spécialisation en innovation, j'ai été enseignant-chercheur, chef d'équipe à la RoboCup. J'ai également fondé un Makerspace associatif : IDIoTsLab.</p>
-                    
-                    <p>En parallèle, j'ai découvert le chant et intégré le Conservatoire à Rayonnement Régional de Lyon où j'ai pu grandement approfondir la discipline, guidé par Claire MARBOT et Françoise AGNIEL.</p>
-                    
-                    <p><strong>Aujourd'hui, je me construis sur la base de quatre piliers : artisanat, ingénierie, innovation et musique.</strong></p>
+                    <p>Depuis tout petit, je suis animé par l’envie de créer, de comprendre, de transformer. Issu d’une famille d’entrepreneurs, j’ai grandi dans les copeaux, les étincelles, les câbles et les idées : j’ai appris menuiserie, mécanique, électricité, etc, toujours au service de projets concrets. Cet esprit du "faire", je l’ai cultivé et décliné à ma façon.</p>
+                </br>
+                    <p>Diplômé de deux master, ingénieur robotique à CPE Lyon et diplôme de emlyon spécialisation en innovation, j’ai été enseignant-chercheur, chef d’équipe à la RoboCup (compétition mondiale de robotique). J’ai également fondé un Makerspace associatif : IDIoTsLab. C’est un lieu de transmission, de création et d’invention collective : décors, machines, objets divers, bière, couteaux, jeux… mais surtout un espace de vie initiateur de liens.</p>
+                </br>
+                    <p>En parallèle de mes études, un peu par hasard, j’ai découvert le chant. J’ai eu la chance de me voir confier un rôle soliste dans un opéra monté par Michela Bertagnolli, me donnant le goût de la scène. Après une pause due aux études supérieures, j’ai repris le chant il y a 5 ans en intégrant le Conservatoire à Rayonnement Régional de Lyon où j’ai pu grandement approfondir la discipline, guidé notamment par Claire MARBOT et Françoise AGNIEL.</p>
+                </br>
+                    <p>Avec des amis du Conservatoire, j’ai créé Les Opéras Miniatures, mêlant mise en scène, fabrication de décors, logistique, communication et, bien sûr, le chant. Un opéra de poche, qui vise à démocratiser cet art et à le rendre accessible à un large public, tout en restant fidèle à la qualité des opéras classiques.</p>
+                </br>
+                    <p>Aujourd’hui, je me construis sur la base de ces quatre piliers : artisanat, ingénierie, innovation et musique. Une alchimie au service de la création, partagée avec d’autres, portant toujours les valeurs qui me sont chères. Car savoir ce que l'on veut faire, ce n’est pas très important et c’est changeant. Choisir qui l’on veut être, c'est ce qui compte.</p>
                 </div>
                 <div class="parcours-image">
                     <div class="profile-container">
@@ -832,13 +835,26 @@
     <section id="identite">
         <div class="container">
             <h2 class="section-title">L'identité</h2>
-            <div class="identity-intro">
-                "J'ai conçu ce programme comme un miroir brisé, où chaque fragment reflète une façon d'être, une identité sur le soi."
-            </div>
+            
             <div class="parcours-text">
-                <p>La multiplicité pose fréquemment des questions d'identification. Nous cherchons souvent à catégoriser pour se rassurer et éviter l'inconnu qui perturbe. Pour moi, l'identité ne se résume pas seulement à ce que l'on fait.</p>
+                <p>La multiplicité pose fréquemment des questions d’identification. Nous cherchons souvent à catégoriser pour se rassurer et éviter l’inconnu qui perturbe. Généralement, on se définie d’ailleurs par ce que l’on fait : c’est une des premières informations que l’on a de quelqu’un lors d’une rencontre (son nom et son métier/activité). Mais être boulanger, chanteur, astronaute ou pompier.. Est ce vraiment notre identité ? Le fameux : « Quand je serais grand, je serai... », est ce vraiment un but atteignable et souhaitable ? Pour moi, l’identité, ne se résume pas à cela.</p>
+            </br>
+                <p>J’ai conçu ce programme comme un miroir brisé, où chaque fragment reflète une façon d’être, une identité sur le soi :</p>
+
+                <ul>
+                    <li>Identité blessée (Quand la flamme de l’amour)</li>
+                    <li>Jugement et identité (L’Albatros)</li>
+                    <li>L’identité différente (Gute Nacht)</li>
+                    <li>Identité brute (The Vagabond)</li>
+                    <li>Quand l’identité devient souvenir (Chanson de la Mort)</li>
+                    <li>Identité sociale (Hai già vinta la causa)</li>
+                    <li>Mon identité (Projet personnel)</li>
+                </ul>
+            </br>
+            <div class="identity-intro">
+                Vous trouverez dans ce livret une présentation de chaque œuvre, une note personnelle sur ces choix et leur lien avec le thème de l’identité. Les textes ainsi que leurs traductions sont en fin de livret.
+            </div>
                 
-                <p>Ce programme explore différentes facettes de l'identité à travers la musique : l'identité blessée, celle jugée par les autres, l'identité différente, brute, celle qui devient souvenir, l'identité sociale, et enfin mon identité personnelle à travers une création originale.</p>
             </div>
         </div>
     </section>
@@ -894,6 +910,14 @@
                     <p class="work-description">Le Comte se pensait au-dessus grâce à son nom, son rang, son pouvoir. Quand l'identité se réduit à un rôle social, la moindre faille devient un gouffre.</p>
                     <div class="click-hint">🔍 Cliquez pour voir le détail complet</div>
                 </div>
+
+                <!-- <div class="work-card" onclick="openModal('Opérap')">
+                    <div class="work-theme">Mon identité</div>
+                    <h3 class="work-title">Opérap</h3>
+                    <div class="work-composer">Sébastien ALTOUNIAN</div>
+                    <p class="work-description">Le Comte se pensait au-dessus grâce à son nom, son rang, son pouvoir. Quand l'identité se réduit à un rôle social, la moindre faille devient un gouffre.</p>
+                    <div class="click-hint">🔍 Cliquez pour voir le détail complet</div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -904,11 +928,11 @@
                 <h2 class="operap-title">Opérap</h2>
                 <div class="operap-subtitle">Mon identité : un voyage à la croisée des mondes</div>
                 <p class="operap-description">
-                    Ce projet musical repose sur la création musicale en direct, croisant voix et technologie, entre chant, voix parlée et performance live. J'utilise un logiciel de looping permettant de faire des boucles superposées afin de tisser une instrumentale. Tous les sons sont créés uniquement avec la voix, sans modifications.
+                    Ce projet repose sur la création musicale en direct, croisant voix et technologie, entre chant, voix parlée et performance live. Je vais utiliser un logiciel de looping permettant de faire des boucles superposées afin de tisser une instrumentale. Tous les sons que vous entendrez sont créés uniquement avec la voix, sans modification quelconque. Cette dernière servira de base à un texte de ma composition qui retrace mon parcours, et le long chemin qu’il m’a fallu pour dompter et assumer ces différentes facettes.
                 </p>
                 <br>
                 <p class="operap-description">
-                    Cette composition est une rencontre entre plusieurs univers. J'y mêle chant lyrique, écriture, informatique, beatbox, construction, instrumentation. C'est une photo à l'instant T de qui je suis aujourd'hui : héritier de la tradition, curieux de la modernité, artisan du son et chercheur d'émotion.
+                    J’ai souhaité clore ce parcours par une création originale faite pour l’occasion, que j’ai nommée Opérap. Comme une personnalisation de mon identité, cette composition est une rencontre entre plusieurs univers. J’y mêle chant lyrique, écriture, informatique, beatbox, construction, instrumentation. C’est une photo à l’instant T de qui je suis aujourd’hui et comment j’en suis arrivé là, une synthèse volontairement hybride de tout ce qui me compose : héritier de la tradition, curieux de la modernité, artisan du son et chercheur d’émotion.
                 </p>
             </div>
         </div>
@@ -1167,7 +1191,136 @@ et me fait jubiler.</div>
             <div class="text-work">
                 <h3>Opérap</h3>
                 <div class="composer">Sébastien ALTOUNIAN</div>
-                <div class="text-content french">Texte à venir</div>
+                <div class="text-content french">Mon raisonnement est simple
+pas d'étonnement pour simplet
+Un jour tu nais un jour tu meurs
+entr' les 2 faut combler les heures
+C'est là le point critique 
+quand tu vois c'que le monde fabrique
+Tout tourne autour du fric
+tout en négligeant toute éthique-toc
+tic-toc
+le temps qui file me flippe STOP
+...
+Pas le temps pour tes Tic-Toc
+ 
+Quand tu vois comme c'est dur 
+de construire le futur
+franch'ment je suis pas sûr
+d'espérer que ça dure
+quand l'homme et la nature
+sont en rupture
+
+Sentiment de n'être que de passage
+Sentiment que naître n'était pas sage
+
+J'quitte l'opéra 
+pour un op. de rap
+L'opération dérape
+Stoppé raz 
+dans la traque
+d'l'enfant qui
+a grandi
+passe ses nuits
+dans l’sursis,
+réfléchit
+sans répit
+pour construire
+sa vie
+
+Certains parlent d' "à quoi bon"
+d'autres de "toucher le fond du lac"
+Les signes ne sont pas bons
+je crois que mon monde part en vrac
+j'ai fait de longues études
+validé 2 diplômes
+malgré ces certitudes
+dans tout ça je me paume
+revient cette lassitude
+depuis que je suis môme
+Enfant hyperactif ? 
+Non c'est que l’symptôme
+
+Pour soigner ma psychose
+je fais trop d'choses
+c'est l’overdose
+faut qu'j'me repose
+mais c'est cette cause 
+qui me fait vivre.
+
+Je cherche un phare 
+mais quand même l'art
+dernier bastion de l'expression devient un pion
+de la mondialisation
+développant l'addiction
+à la rentabilisation
+Monétisation,
+Spécialisation,
+Et à l’exclusion 
+Je pose des questions
+Mais je passe pour un con 
+avec ma revendication
+Que péter les cloisons
+S'rait une solution d'libération
+Les rats sont 
+Avides de ma ration
+Exploitant les réflexions 
+d'l'enfant sans respecter ses conditions
+
+J'me nourris des différences
+Respect'les intelligences
+Modestie gravée dans l'enfance
+Par les parents, belle clairvoyance
+
+Comme eux je donne, je donne.. 
+sans savoir dire non
+J'pardone, j'pardonne, j'pardonne
+Et ça même aux ...
+
+Et cette arménité 
+que j'ai jamais su gérer 
+J'me sens comme possédé
+Par des souvenirs étrangers
+Mais quand l'Arménie
+Des guerres rie
+Une mère subit
+L'enfer d'un fils sans vie
+Je sens des pleurs en moi
+
+J'ai 30 ans aujourd'hui le 19 juin 2025
+Fini la dystopie j'vais assumer l'ornithorynque
+A la croisée des mondes 
+Je suis une bête immonde 
+Sortant des catacombes pour rendre féconde ses idées vagabondes
+
+Un artiste assumé 
+Artisan passionné
+Innovateur affûté
+Ingénieur connecté 
+Je veux créer de mes mains, connecté à l'humain,
+un nouveau monde demain
+possédé par le passé, le présent, le futur
+jusqu'à l'odeur de sapin
+
+Donner vie à une utopie,
+Un paradis rempli d'amis,
+des idiots un peu marteaux
+ayant des idéaux
+avec des idées au
+dessus des dogmes
+remettre la tech au
+service des Hommes
+
+C'est pourquoi aujourd'hui,
+Je vous fais le récit,
+De mon laboratoire
+Mélangeant les savoirs.
+Une lettre de bienvenue,
+comme un premier aperçu
+de ce nouveau départ 
+Le rêve qui prend vie 
+D'un enfant épanoui...
+                </div>
             </div>
         </div>
     </section>
