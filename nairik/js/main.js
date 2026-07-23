@@ -45,6 +45,22 @@
     });
   };
 
+// Protect email adress from bot
+function initProtectedMail() {
+
+    const mail = document.getElementById("contact-mail");
+    if (!mail) return;
+
+    setTimeout(() => {
+
+        const address = `${mail.dataset.user}@${mail.dataset.domain}`;
+
+        mail.href = `mailto:${address}`;
+        mail.textContent = address;
+
+    }, 250);
+}
+
   menuToggle?.addEventListener('click', toggleMenu);
   navLinks.forEach((link) => link.addEventListener('click', closeMenu));
   window.addEventListener('resize', () => {
@@ -59,7 +75,10 @@
     if (event.key === 'Escape') closeMenu();
   });
 
+  document.addEventListener("DOMContentLoaded", initProtectedMail); // Call of the protect email fonction
+
   if (year) year.textContent = String(new Date().getFullYear());
   updateHeader();
   updateActiveLink();
+
 })();
