@@ -69,7 +69,8 @@ function initProtectedMail() {
 
         if (form) {
             const formAddress = `${form.dataset.user}@${form.dataset.domain}`;
-            form.action = `mailto:${formAddress}`;
+            const subject = encodeURIComponent('[Site internet] - Formulaire de contact');
+            form.action = `mailto:${formAddress}?subject=${subject}`;
         }
 
     }, 250);
