@@ -1,0 +1,37 @@
+:root {
+  /* Couleurs principales */
+  --color-terracotta: #A65A44;
+  --color-sand: #E9D8C3;
+  --color-stone: #8B847A;
+  --color-ivory: #F8F5F0;
+  --color-gold: #C49A5A;
+  --color-anthracite: #2F2F2F;
+
+  /* Couleurs fonctionnelles */
+  --color-white: #FFFFFF;
+  --color-black: #151515;
+  --color-text-muted: #6E6963;
+  --color-border: rgba(47, 47, 47, 0.14);
+  --color-dark-surface: #292725;
+
+  /* Typographies */
+  --font-title: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Inter", Arial, sans-serif;
+
+  /* Mise en page */
+  --container-width: 1200px;
+  --page-padding: clamp(1.25rem, 3vw, 2.5rem);
+  --section-space: clamp(5rem, 10vw, 9rem);
+  --header-height: 5rem;
+
+  /* Formes et effets */
+  --radius-small: 0.4rem;
+  --radius-medium: 1rem;
+  --radius-large: 2rem;
+  --shadow-soft: 0 1.5rem 4rem rgba(47, 47, 47, 0.10);
+  --transition-fast: 180ms ease;
+  --transition-base: 320ms ease;
+
+  /* Ajout perso */
+  --color-pomegranate: #4A040B ;
+}
