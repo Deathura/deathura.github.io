@@ -39,7 +39,6 @@ button { cursor: pointer; }
 }
 
 h1, h2, h3 {
-  /* color: var(--color-gold); */
   margin: 0 0 1rem;
   font-family: var(--font-title);
   font-weight: 600;
@@ -59,7 +58,7 @@ p { margin: 0 0 1.25rem; }
 .lead { font-size: clamp(1.2rem, 2vw, 1.45rem); line-height: 1.55; }
 .eyebrow {
   margin-bottom: 1rem;
-  color: var(--color-terracotta);
+  color: var(--color-pomegranate);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -73,15 +72,14 @@ p { margin: 0 0 1.25rem; }
   z-index: 100;
   height: var(--header-height);
   color: var(--color-white);
-  transition: background var(--transition-base), box-shadow var(--transition-base), color var(--transition-base);
-}
-.site-header.is-scrolled {
-  /* color: var(--color-anthracite);
-  background: rgba(248, 245, 240, 0.93); */
-  color: var(--color-white);
-  background: var(--color-pomegranate); 
-  box-shadow: 0 0.5rem 2rem rgba(47,47,47,0.08);
-  backdrop-filter: blur(14px);
+  --header-progress: 0;
+  background-color: rgba(var(--color-pomegranate-rgb), var(--header-progress));
+  box-shadow: 0 0.5rem 2rem rgba(47, 47, 47, calc(0.08 * var(--header-progress)));
+  backdrop-filter: blur(calc(14px * var(--header-progress)));
+  transition:
+    background-color 0.15s linear,
+    box-shadow 0.15s linear,
+    backdrop-filter 0.15s linear;
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
 .brand { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--font-title); }
@@ -145,8 +143,7 @@ p { margin: 0 0 1.25rem; }
   transition: transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast), border var(--transition-fast);
 }
 .button:hover { transform: translateY(-2px); }
-.button-primary { color: var(--color-white); background: var(--color-terracotta); }
-/* .button-primary { color: var(--color-white); background: var(--color-pomegranate); } */
+.button-primary { color: var(--color-white); background: var(--color-pomegranate); }
 .button-primary:hover { background: #8f4c39; }
 .button-ghost { color: var(--color-white); border-color: rgba(255,255,255,.65); background: rgba(255,255,255,.04); }
 .button-ghost:hover { color: var(--color-anthracite); background: var(--color-white); }
@@ -186,8 +183,8 @@ p { margin: 0 0 1.25rem; }
 .journey-line { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin: 4rem 0 0; padding: 0; list-style: none; }
 .journey-line::before { content: ""; position: absolute; top: 1.3rem; right: 4%; left: 4%; height: 1px; background: linear-gradient(90deg, transparent, var(--color-gold), transparent); }
 .journey-step { position: relative; padding-top: 3.5rem; }
-.journey-step::before { content: ""; position: absolute; top: .95rem; left: 0; width: .7rem; aspect-ratio: 1; border: 3px solid var(--color-ivory); border-radius: 50%; background: var(--color-terracotta); box-shadow: 0 0 0 1px var(--color-terracotta); }
-.journey-index { color: var(--color-terracotta); font-size: .72rem; letter-spacing: .15em; }
+.journey-step::before { content: ""; position: absolute; top: .95rem; left: 0; width: .7rem; aspect-ratio: 1; border: 3px solid var(--color-ivory); border-radius: 50%; background: var(--color-pomegranate); box-shadow: 0 0 0 1px var(--color-pomegranate); }
+.journey-index { color: var(--color-pomegranate); font-size: .72rem; letter-spacing: .15em; }
 .journey-step h3 { margin-top: .7rem; }
 
 /* Cartes artistes */
@@ -209,7 +206,7 @@ p { margin: 0 0 1.25rem; }
 .dates-list { border-top: 1px solid var(--color-border); }
 .date-card { display: grid; grid-template-columns: 1.1fr 1fr auto; gap: 2rem; align-items: center; padding: 2rem 0; border-bottom: 1px solid var(--color-border); }
 .date-card time { display: flex; align-items: baseline; gap: .8rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; }
-.date-card time span { color: var(--color-terracotta); font-family: var(--font-title); font-size: 3.5rem; line-height: 1; }
+.date-card time span { color: var(--color-pomegranate); font-family: var(--font-title); font-size: 3.5rem; line-height: 1; }
 .date-card h3 { margin: 0; }
 .date-card p { margin: 0; color: var(--color-text-muted); }
 .dates-note { margin-top: 2rem; text-align: center; color: var(--color-text-muted); font-style: italic; }
@@ -226,7 +223,7 @@ p { margin: 0 0 1.25rem; }
 .form-note { margin: 1rem 0 0; color: var(--color-text-muted); font-size: .75rem; }
 
 /* Footer */
-.site-footer { padding-block: 4rem; color: rgba(255,255,255,.75); background: var(--color-pomegranate);; }
+.site-footer { padding-block: 4rem; color: rgba(255,255,255,.75); background: var(--color-pomegranate); }
 .footer-inner { display: grid; grid-template-columns: 1.2fr 1fr auto; gap: 3rem; align-items: end; }
 .footer-brand { margin-bottom: 1rem; color: var(--color-white); }
 .site-footer nav { display: grid; gap: .55rem; }

@@ -27,15 +27,23 @@
 
   const updateHeader = () => {
     if (!header) return;
-    header.classList.toggle('is-scrolled', window.scrollY > 24);
+    const project = document.getElementById('project');
+    const end = project ? project.offsetTop : window.innerHeight;
+
+    // Progression 0 → 1 entre le haut de page et le tag #project
+    const progress = Math.min(Math.max(window.scrollY / end, 0), 1);
+
+    header.style.setProperty('--header-progress', progress);
   };
+
+  const sectionNavAlias = { armenia: 'project' };
 
   const updateActiveLink = () => {
     const offset = window.scrollY + window.innerHeight * 0.35;
     let currentId = '';
 
     sections.forEach((section) => {
-      if (section.offsetTop <= offset) currentId = section.id;
+      if (section.offsetTop <= offset) currentId = sectionNavAlias[section.id] || section.id;
     });
 
     navLinks.forEach((link) => {
