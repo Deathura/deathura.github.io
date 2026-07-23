@@ -1,6 +1,6 @@
 :root {
   /* Couleurs principales */
-  --color-terracotta: #A65A44;
+  --color-terracotta: #5e141b;
   --color-sand: #E9D8C3;
   --color-stone: #8B847A;
   --color-ivory: #F8F5F0;
@@ -33,5 +33,5 @@
   --transition-base: 320ms ease;
 
   /* Ajout perso */
-  --color-pomegranate: #4A040B ;
+  --color-pomegranate: #4A040B;
 }

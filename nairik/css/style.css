@@ -79,12 +79,9 @@ p { margin: 0 0 1.25rem; }
 .brand { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--font-title); }
 .brand-mark {
   display: grid;
-  width: 2rem;
+  width: 4rem;
   aspect-ratio: 1;
   place-items: center;
-  border: 1px solid currentColor;
-  /* border-radius: 50%; */
-  /* font-size: 1.1rem; */
 }
 .brand-name { font-size: 1.6rem; font-weight: 600; }
 .main-nav { display: flex; align-items: center; gap: clamp(1rem, 2vw, 2rem); font-size: 0.86rem; }
