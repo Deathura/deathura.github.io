@@ -57,14 +57,20 @@
 function initProtectedMail() {
 
     const mail = document.getElementById("contact-mail");
-    if (!mail) return;
+    const form = document.getElementById("contact-form");
 
     setTimeout(() => {
 
-        const address = `${mail.dataset.user}@${mail.dataset.domain}`;
+        if (mail) {
+            const mailAddress = `${mail.dataset.user}@${mail.dataset.domain}`;
+            mail.href = `mailto:${mailAddress}`;
+            mail.textContent = mailAddress;
+        }
 
-        mail.href = `mailto:${address}`;
-        mail.textContent = address;
+        if (form) {
+            const formAddress = `${form.dataset.user}@${form.dataset.domain}`;
+            form.action = `mailto:${formAddress}`;
+        }
 
     }, 250);
 }
